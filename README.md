@@ -24,34 +24,39 @@ npm install vivox-sdk-node
 
 *Note: The native addon will automatically compile during installation if build tools (Python, Visual Studio/C++) are available.*
 
+## Connection Flow
+
+Vivox requires a specific sequence of operations. You **must** create a connector before attempting to login.
+
+1.  **Initialize:** Call `vivox.initialize()`.
+2.  **Setup Listeners:** Listen for `connectorCreated`, `loginSuccess`, and `joinSuccess`.
+3.  **Create Connector:** Call `vivox.connectorCreate(serverUrl)`.
+4.  **Login:** Inside the `connectorCreated` event, call `vivox.login()` or `vivox.loginAnonymous()`.
+5.  **Join:** Inside the `loginSuccess` event, call `vivox.joinChannel()`.
+
 ## Quick Start
 
 ```javascript
 const vivox = require('vivox-sdk-node');
-const { VivoxUtils, VivoxError, VivoxLoginState } = require('vivox-sdk-node');
+const { VivoxUtils, VivoxError } = require('vivox-sdk-node');
 
-// 1. Initialize the SDK
 vivox.initialize();
 
-// 2. Setup Event Listeners
-vivox.on('loginStateChange', (data) => {
-    console.log(`Login State: ${VivoxUtils.getLoginStateName(data.state)}`);
+// Step 1: Wait for connector
+vivox.on('connectorCreated', (event) => {
+    if (event.status === VivoxError.VX_E_SUCCESS) {
+        // Step 2: Login
+        vivox.loginAnonymous("main_connector", accountUri, LOGIN_TOKEN);
+    }
 });
 
-vivox.on('joinSuccess', (event) => {
-    console.log('Successfully joined the channel!');
-    
-    // Set local mic volume to 100%
-    vivox.setLocalMicVolume(100);
+vivox.on('loginSuccess', (event) => {
+    // Step 3: Join Channel
+    vivox.joinChannel(accountUri, channelUri, CHANNEL_TOKEN);
 });
 
-vivox.on('message', (m) => {
-    console.log(`[CHAT] ${m.participant_uri}: ${m.message}`);
-});
-
-// 3. Create Connector and Start Flow
+// Start the flow
 vivox.connectorCreate("https://your-vivox-server.com/app", "main_connector");
-// After connectorCreated event, call vivox.loginAnonymous() or vivox.login()
 ```
 
 ## Local Moderation Examples

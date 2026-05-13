@@ -1,0 +1,172 @@
+game.api uç noktasındaki vivox başlangıç eventi:
+
+42["game-set-voice-enabled","{\"userId\":\"57cc645f-9f6c-49e5-a246-ffa4f054b87f\",\"channelId\":\"867d5ab7-5947-4096-8806-43d0484f349e\",\"loginToken\":\"e30.eyJpc3MiOiJ3ZXJld29sZi13d28iLCJleHAiOjE3NzY2NjQzNDA4OTQsInZ4YSI6ImxvZ2luIiwidnhpIjo1OTQ1LCJmIjoic2lwOi53ZXJld29sZi13d28uNTdjYzY0NWYtOWY2Yy00OWU1LWEyNDYtZmZhNGYwNTRiODdmLkBtdDJwLnZpdm94LmNvbSJ9.fbB5NPI1brDoa2Qmr24Kbr1cqZ2yXPafjTX4tOgmP38\",\"channelToken\":\"e30.eyJpc3MiOiJ3ZXJld29sZi13d28iLCJleHAiOjE3NzY2NjQzNDA4OTQsInZ4YSI6ImpvaW4iLCJ2eGkiOjE4NzYsImYiOiJzaXA6LndlcmV3b2xmLXd3by41N2NjNjQ1Zi05ZjZjLTQ5ZTUtYTI0Ni1mZmE0ZjA1NGI4N2YuQG10MnAudml2b3guY29tIiwidCI6InNpcDpjb25mY3RsLWctd2VyZXdvbGYtd3dvLjg2N2Q1YWI3LTU5NDctNDA5Ni04ODA2LTQzZDA0ODRmMzQ5ZUBtdDJwLnZpdm94LmNvbSJ9.lg-WwalabNwP09WuF-GDVJw8fBRU5TdcklQhvBN-WIY\",\"environmentApiEndpoint\":\"https://mt2p.www.vivox.com/api2\",\"environmentDomain\":\"mt2p.vivox.com\",\"domain\":\"werewolf-wwo\"}"]
+
+
+
+
+
+mt2p.www.vivox...
+HTTP/1.1 200 OK
+Content-Length: 862
+Allow-Methods: GET, POST, OPTIONS
+Content-Encoding: utf-8
+Server: TwistedWeb/12.2.0
+Connection: close
+Date: Mon, 20 Apr 2026 04:52:22 GMT
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range
+Content-Type: text/xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<VCConfiguration>
+  <DefaultRealm>mt2p.vivox.com</DefaultRealm>
+  <XMPPServer>
+    <host>mt2p-mim-f5.vivox.com</host>
+    <port>443</port>
+    <tls>true</tls>
+  </XMPPServer>
+  <WSXMPPServer>wss://mt2p-ws.vivox.com:443/ws-xmpp</WSXMPPServer>
+  <DefaultWatson>https://cdp.vivox.com</DefaultWatson>
+  <WatsonSampleRate>5</WatsonSampleRate>
+  <DefaultDyson>https://cdp.vivox.com</DefaultDyson>
+  <DysonSampleRate>5</DysonSampleRate>
+  <DefaultEureka>https://watson.vivox.com</DefaultEureka>
+  <EurekaSampleRate>5</EurekaSampleRate>
+  <ConnectionRecoveryInternetCheckAddresses>8.8.8.8:53</ConnectionRecoveryInternetCheckAddresses>
+  <NeverRTPTimeout>15</NeverRTPTimeout>
+  <LostRTPTimeout>40</LostRTPTimeout>
+  <XmppPingIntervalSeconds>10</XmppPingIntervalSeconds>
+  <MaxUserUriLength>146</MaxUserUriLength>
+</VCConfiguration>
+
+
+
+
+mt2p.vivox...
+> <?xml version='1.0'?><stream:stream to='mt2p.vivox.com'  xml:lang='en' version='1.0' xmlns='jabber:client' xmlns:stream='http://etherx.jabber.org/streams' ua='Vivox-SDK-5.27.0.33953.7178d46eA_arm64v8a'>
+
+ < <?xml version='1.0'?><stream:stream xmlns='jabber:client' xmlns:stream='http://etherx.jabber.org/streams' id='64a9d7d0405d8405' from='mt2p.vivox.com' version='1.0' xml:lang='en'>
+
+
+
+< <stream:features><mechanisms xmlns='urn:ietf:params:xml:ns:xmpp-sasl'><mechanism>PLAIN</mechanism></mechanisms><sm xmlns='urn:xmpp:sm:3'/></stream:features>
+
+
+
+> <auth mechanism="PLAIN" xmlns="urn:ietf:params:xml:ns:xmpp-sasl">AC53ZXJld29sZi13d28uNTdjYzY0NWYtOWY2Yy00OWU1LWEyNDYtZmZhNGYwNTRiODdmLgBlMzAuZXlKcGMzTWlPaUozWlhKbGQyOXNaaTEzZDI4aUxDSmxlSEFpT2pFM056WTJOalF6TkRBNE9UUXNJblo0WVNJNklteHZaMmx1SWl3aWRuaHBJam8xT1RRMUxDSm1Jam9pYzJsd09pNTNaWEpsZDI5c1ppMTNkMjh1TlRkall6WTBOV1l0T1dZMll5MDBPV1UxTFdFeU5EWXRabVpoTkdZd05UUmlPRGRtTGtCdGRESndMblpwZG05NExtTnZiU0o5LmZiQjVOUEkxYnJEb2EyUW1yMjRLYnIxY3FaMnlYUGFmalRYNHRPZ21QMzg=</auth>
+
+
+
+< <success xmlns='urn:ietf:params:xml:ns:xmpp-sasl'/>
+
+
+
+> <?xml version='1.0'?><stream:stream to='mt2p.vivox.com'  xml:lang='en' version='1.0' xmlns='jabber:client' xmlns:stream='http://etherx.jabber.org/streams' ua='Vivox-SDK-5.27.0.33953.7178d46eA_arm64v8a'>
+
+
+
+< <?xml version='1.0'?><stream:stream xmlns='jabber:client' xmlns:stream='http://etherx.jabber.org/streams' id='c8178d0550f83581' from='mt2p.vivox.com' version='1.0' xml:lang='en'>
+
+
+
+< <stream:features><bind xmlns='urn:ietf:params:xml:ns:xmpp-bind'/><session xmlns='urn:ietf:params:xml:ns:xmpp-session'/><sm xmlns='urn:xmpp:sm:3'/></stream:features>
+
+
+
+> <iq id="_xmpp_bind1" type="set"><bind xmlns="urn:ietf:params:xml:ns:xmpp-bind"/></iq>
+
+
+
+< <iq id='_xmpp_bind1' type='result' _vx_start_time='1776660743882050514'><bind xmlns='urn:ietf:params:xml:ns:xmpp-bind'><jid>.werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.@mt2p.vivox.com/bce19f81c76680ea1776-660743-882235</jid></bind></iq>
+
+
+
+> <iq id="_xmpp_session1" type="set"><session xmlns="urn:ietf:params:xml:ns:xmpp-session"/></iq>
+
+
+
+< <iq type='result' _vx_start_time='1776660744131779802' id='_xmpp_session1'><session xmlns='urn:ietf:params:xml:ns:xmpp-session'/></iq>
+
+
+
+> <iq id="0ded72a2-75eb-4e56-8243-0999a372e376" type="get" from=".werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.@mt2p.vivox.com"><query xmlns="jabber:iq:roster"/></iq>
+
+
+
+< <iq from='.werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.@mt2p.vivox.com' to='.werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.@mt2p.vivox.com/bce19f81c76680ea1776-660743-882235' id='0ded72a2-75eb-4e56-8243-0999a372e376' type='result' _vx_start_time='1776660744387931753'><query xmlns='jabber:iq:roster'/></iq>
+
+
+
+> <iq id="38929b24-b741-4f3f-94e3-3bd68f15fdef" type="get" from=".werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.@mt2p.vivox.com"><blocklist xmlns="urn:xmpp:blocking"/></iq>
+
+
+
+< <iq from='.werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.@mt2p.vivox.com' to='.werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.@mt2p.vivox.com/bce19f81c76680ea1776-660743-882235' id='38929b24-b741-4f3f-94e3-3bd68f15fdef' type='result' _vx_start_time='1776660744621897842'><blocklist xmlns='urn:xmpp:blocking'/></iq>
+
+
+
+> <enable xmlns="urn:xmpp:sm:3" resume="true"/><presence to="confctl-g-werewolf-wwo.867d5ab7-5947-4096-8806-43d0484f349e@muc.mt2p.vivox.com/werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f"><m xmlns="urn:vivox:presence"><display_name>.werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.</display_name></m><x xmlns="http://jabber.org/protocol/muc"><password>e30.eyJpc3MiOiJ3ZXJld29sZi13d28iLCJleHAiOjE3NzY2NjQzNDA4OTQsInZ4YSI6ImpvaW4iLCJ2eGkiOjE4NzYsImYiOiJzaXA6LndlcmV3b2xmLXd3by41N2NjNjQ1Zi05ZjZjLTQ5ZTUtYTI0Ni1mZmE0ZjA1NGI4N2YuQG10MnAudml2b3guY29tIiwidCI6InNpcDpjb25mY3RsLWctd2VyZXdvbGYtd3dvLjg2N2Q1YWI3LTU5NDctNDA5Ni04ODA2LTQzZDA0ODRmMzQ5ZUBtdDJwLnZpdm94LmNvbSJ9.lg-WwalabNwP09WuF-GDVJw8fBRU5TdcklQhvBN-WIY</password></x></presence>
+
+
+
+< <enabled xmlns='urn:xmpp:sm:3' id='arvi3XLMZR7Up7tg5cTR6N9oHDiB' resume='true'/>
+
+
+
+< <presence from='confctl-g-werewolf-wwo.867d5ab7-5947-4096-8806-43d0484f349e@muc.mt2p.vivox.com/werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f' to='.werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.@mt2p.vivox.com/bce19f81c76680ea1776-660743-882235' ua='Vivox-SDK-5.27.0.33953.7178d46eA_arm64v8a' xml:lang='en' _vx_start_time='1776660744876306051'><m xmlns='urn:vivox:presence'><display_name>.werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.</display_name></m><x xmlns='http://jabber.org/protocol/muc#user'><item jid='.werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.@mt2p.vivox.com/bce19f81c76680ea1776-660743-882235' affiliation='none' role='participant' display_name='.werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.'/><status code='110'/><status code='100'/><status code='201'/></x></presence><r xmlns='urn:xmpp:sm:3'/><message from='confctl-g-werewolf-wwo.867d5ab7-5947-4096-8806-43d0484f349e@muc.mt2p.vivox.com' to='.werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.@mt2p.vivox.com/bce19f81c76680ea1776-660743-882235' type='groupchat'><subject/><body/></message><r xmlns='urn:xmpp:sm:3'/>
+
+
+
+> <iq id="6eb478a0-b614-4225-9a98-3c2134eeca86" to="confctl-g-werewolf-wwo.867d5ab7-5947-4096-8806-43d0484f349e@muc.mt2p.vivox.com" type="set"><invite callid="1131256576" xmlns="urn:vivox:muc" v="2">v=0
+o=vivox 0 0 IN IP4 10.0.0.11
+s= 
+c=IN IP4 10.0.0.11
+t=0 0
+m=audio 0 RTP/AVP 127
+a=rtpmap:127 VIVOXVANI/32000
+a=fmtp:127 ver=3;mode=3;sub-types=1,7;codecs=0x26
+a=vx_jc:60
+a=vx_rtcp:0
+a=vx_ext:0x4
+</invite></iq><a h="1" xmlns="urn:xmpp:sm:3"/><a h="2" xmlns="urn:xmpp:sm:3"/>
+
+
+
+< <iq from='confctl-g-werewolf-wwo.867d5ab7-5947-4096-8806-43d0484f349e@muc.mt2p.vivox.com' to='.werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.@mt2p.vivox.com/bce19f81c76680ea1776-660743-882235' id='6eb478a0-b614-4225-9a98-3c2134eeca86' type='result' _vx_start_time='1776660745108721530'><invite callid='1131256576' xmlns='urn:vivox:muc' v='2'>v=0
+o=- 3985649545 3985649545 IN IP4 85.236.96.254
+s=session
+c=IN IP4 85.236.96.254
+t=0 0
+m=audio 27450 RTP/AVP 127
+a=rtpmap:127 VIVOXVANI/32000
+a=fmtp:127 ver=3;mode=3;sub-types=1,7;codecs=0x26
+a=vx_media_cookie:0a0022921f900a0022921f9a0155ec60fe6b3a
+a=candidate 322983133 1 pas322983133 UDP 1.0 85.236.96.254 27450
+a=vx_chan_type:static
+a=vx_rtcp:0
+</invite></iq>
+
+
+
+< <r xmlns='urn:xmpp:sm:3'/>
+
+
+
+> <a h="3" xmlns="urn:xmpp:sm:3"/><presence id="05d9cbd1-6856-466a-87f2-a57f069e2d9b" to="confctl-g-werewolf-wwo.867d5ab7-5947-4096-8806-43d0484f349e@muc.mt2p.vivox.com/werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f"><m xmlns="urn:vivox:presence"><audio/><display_name>.werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.</display_name></m></presence>
+
+
+
+< <presence from='confctl-g-werewolf-wwo.867d5ab7-5947-4096-8806-43d0484f349e@muc.mt2p.vivox.com/werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f' to='.werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.@mt2p.vivox.com/bce19f81c76680ea1776-660743-882235' ua='Vivox-SDK-5.27.0.33953.7178d46eA_arm64v8a' xml:lang='en' _vx_start_time='1776660745429911526' id='05d9cbd1-6856-466a-87f2-a57f069e2d9b'><m xmlns='urn:vivox:presence'><audio/><display_name>.werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.</display_name></m><x xmlns='http://jabber.org/protocol/muc#user'><item jid='.werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.@mt2p.vivox.com/bce19f81c76680ea1776-660743-882235' affiliation='none' role='participant' display_name='.werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f.'/><status code='110'/><status code='100'/></x></presence>
+
+
+
+< <r xmlns='urn:xmpp:sm:3'/>
+
+
+
+> <a h="4" xmlns="urn:xmpp:sm:3"/>
+
+
+
+> <presence id="27c8c787-f69e-4349-b1f2-a7b0f9170fb7" type="unavailable" to="confctl-g-werewolf-wwo.867d5ab7-5947-4096-8806-43d0484f349e@muc.mt2p.vivox.com/werewolf-wwo.57cc645f-9f6c-49e5-a246-ffa4f054b87f"/></stream:stream>

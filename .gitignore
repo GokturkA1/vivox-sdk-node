@@ -1,0 +1,57 @@
+# Core SDK folder (too large to push)
+/SDK/
+/SDKSampleApp/
+/SimpleAPI/
+/web-moderator/
+/node-addon/
+
+# Build artifacts
+node_modules/
+build/
+bin/
+obj/
+dist/
+Release/
+Debug/
+x64/
+x86/
+arm64/
+
+# Native binaries
+*.node
+*.pdb
+*.iobj
+*.ipdb
+*.exe
+*.exp
+*.ilk
+*.suo
+*.user
+*.sln
+*.vcxproj
+*.filters
+
+# Global binary ignore but allow essential ones for the wrapper
+*.dll
+*.lib
+!vivox_sdk/lib/vivoxsdk.dll
+!vivox_sdk/lib/vivoxsdk.lib
+
+# Logs and temp files
+*.log
+*.tlog
+*.lastbuildstate
+*.recipe
+*.wav
+.env
+test_data.json
+generate_beep.js
+test_login.js
+test_create.js
+test.js
+beep.wav
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store

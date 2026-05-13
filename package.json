@@ -1,0 +1,41 @@
+{
+  "name": "vivox-sdk-node",
+  "version": "1.0.0",
+  "description": "High-performance, type-safe Node.js wrapper for the Vivox SDK.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "install": "node-gyp rebuild",
+    "build": "node-gyp rebuild",
+    "test": "node example_test.js",
+    "compile": "npx tsc"
+  },
+  "keywords": [
+    "vivox",
+    "voice",
+    "chat",
+    "sdk",
+    "unity",
+    "node-addon",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "node-addon-api": "^8.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.7.0",
+    "node-gyp": "^12.3.0",
+    "typescript": "^6.0.3"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "binding.gyp",
+    "src/vivox_addon.cpp",
+    "vivox_sdk/include/*.h",
+    "vivox_sdk/lib/vivoxsdk.lib",
+    "vivox_sdk/lib/vivoxsdk.dll"
+  ]
+}

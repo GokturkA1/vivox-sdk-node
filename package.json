@@ -1,6 +1,6 @@
 {
   "name": "vivox-sdk-node",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "High-performance, type-safe Node.js wrapper for the Vivox SDK.",
   "main": "index.js",
   "types": "index.d.ts",

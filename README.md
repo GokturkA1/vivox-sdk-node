@@ -86,6 +86,30 @@ vivox.injectAudio(accountHandle, "path/to/audio.wav");
 - `npm run compile`: Recompile the TypeScript wrapper.
 - `npm test`: Run the standard connection example.
 
+## Troubleshooting
+
+### `gyp ERR! find VS` or Visual Studio errors
+This error occurs when `node-gyp` cannot find the C++ build tools on your system. To fix this:
+
+1.  **Install Build Tools:** Run the following command in an Administrator PowerShell/Command Prompt:
+    ```bash
+    npm install --global windows-build-tools
+    ```
+    *Alternatively, install "Desktop development with C++" via the Visual Studio Installer.*
+
+2.  **Manually Set VS Version:** If you have Visual Studio installed but still get the error, tell NPM which version to use:
+    ```bash
+    # For Visual Studio 2022
+    npm config set msvs_version 2022
+    # For Visual Studio 2026 (if applicable)
+    npm config set msvs_version 2026
+    ```
+
+3.  **Check Python:** Ensure Python 3.x is installed and added to your PATH.
+
+### `module not found` after installation
+If you see an error about the native module not being found, ensure you have run `npm install` inside the project to trigger the native build process.
+
 ## License
 
 This project is licensed under the MIT License.

@@ -1,62 +1,87 @@
-# Vivox SDK Node.js Addon
+# Vivox SDK Node.js Wrapper
 
-Bu proje, Vivox SDK'sını Node.js projelerinde kullanabilmek için hazırlanmış bir C++ Addon'dur. Tüm Windows mimarilerini (x64, Win32, arm64) destekleyecek şekilde yapılandırılmıştır.
+A high-performance, fully type-safe Node.js C++ addon for the Vivox SDK. This wrapper provides an asynchronous, EventEmitter-based API to integrate Vivox voice and text chat into your Node.js applications.
 
-## Özellikler
-- **Çoklu Mimari Desteği:** `binding.gyp` dosyası x64, Win32 ve arm64 mimarileri için doğru kütüphane ve DLL eşleştirmelerini otomatik yapar.
-- **Asenkron Olay Döngüsü:** C++ tarafında çalışan bir arka plan iş parçacığı (background thread), Vivox SDK'sından gelen mesajları toplar ve Node.js tarafına `ThreadSafeFunction` kullanarak iletir.
-- **Yüksek Performans:** N-API (Node-Addon-API) kullanılarak geliştirilmiştir.
+## Features
 
-## Kurulum ve Derleme
+- **Asynchronous Event Loop:** Native C++ thread handles Vivox messages and dispatches them to Node.js via `ThreadSafeFunction`.
+- **Full TypeScript Support:** Includes comprehensive interfaces for all events, status codes, and SDK enums.
+- **Strict Error Handling:** Automatically resolves numerical status codes into official Vivox SDK error names (e.g., `VX_E_ACCESSTOKEN_ALREADY_USED`).
+- **Memory Safe:** Implements proper lifecycle management for requests and internal SDK messages to prevent leaks.
+- **Local Moderation:** Built-in methods for local muting, user volume control, and microphone muting.
+- **Audio Injection:** Support for streaming mono 16-bit PCM WAV files into channels.
+- **Positional Audio:** Simple 3D spatial audio positioning support.
 
-### Ön Gereksinimler
-- Node.js (v14 veya üzeri önerilir)
-- Python 3.x
-- Visual Studio 2017 veya üzeri (C++ Masaüstü Geliştirme iş yükü yüklü olmalıdır)
+## Project Structure
 
-### Adımlar
-1. `node-addon` dizinine gidin:
-   ```bash
-   cd node-addon
-   ```
-2. Bağımlılıkları yükleyin:
-   ```bash
-   npm install
-   ```
-3. Addon'u derleyin:
-   ```bash
-   npm run build
-   ```
+The project has been optimized to be lightweight. The core SDK binaries and headers are stored locally within the package, making it portable and easy to install.
 
-## Kullanım
+## Installation
 
-Yeni sürüm `EventEmitter` yapısını destekler:
-
-```javascript
-const vivox = require('./index');
-
-// Olayları dinle
-vivox.on('loginSuccess', (event) => {
-    console.log('Başarıyla giriş yapıldı');
-});
-
-vivox.on('participantAdded', (event) => {
-    console.log('Yeni katılımcı:', event.participant_uri);
-});
-
-vivox.on('message', (event) => {
-    console.log(`${event.participant_uri} dedi ki: ${event.message}`);
-});
-
-// SDK'yı başlat
-vivox.initialize();
-
-// Test verileriyle bağlan (Otomatik Connector -> Login -> Join süreci)
-vivox.connectWithTestData(require('./test_data.json'));
+```bash
+npm install vivox-sdk-node
 ```
 
-## Gelişmiş Özellikler
-- **Cihaz Listeleme:** `vivox.getCaptureDevices()` ve `vivox.getRenderDevices()` çağrıları sonrası `captureDevices` ve `renderDevices` olayları tetiklenir.
-- **Mesaj Gönderme:** `vivox.sendMessage(sessHandle, "Mesaj içeriği")`
-- **Katılımcı Kontrolü:** `vivox.setParticipantMute(sessHandle, uri, true)` ve `vivox.setParticipantVolume(sessHandle, uri, 50)`
-- **3D Ses:** `vivox.set3DPosition(acctHandle, x, y, z, channelUri)`
+*Note: The native addon will automatically compile during installation if build tools (Python, Visual Studio/C++) are available.*
+
+## Quick Start
+
+```javascript
+const vivox = require('vivox-sdk-node');
+const { VivoxUtils, VivoxError, VivoxLoginState } = require('vivox-sdk-node');
+
+// 1. Initialize the SDK
+vivox.initialize();
+
+// 2. Setup Event Listeners
+vivox.on('loginStateChange', (data) => {
+    console.log(`Login State: ${VivoxUtils.getLoginStateName(data.state)}`);
+});
+
+vivox.on('joinSuccess', (event) => {
+    console.log('Successfully joined the channel!');
+    
+    // Set local mic volume to 100%
+    vivox.setLocalMicVolume(100);
+});
+
+vivox.on('message', (m) => {
+    console.log(`[CHAT] ${m.participant_uri}: ${m.message}`);
+});
+
+// 3. Create Connector and Start Flow
+vivox.connectorCreate("https://your-vivox-server.com/app", "main_connector");
+// After connectorCreated event, call vivox.loginAnonymous() or vivox.login()
+```
+
+## Local Moderation Examples
+
+```javascript
+// Mute yourself (other players won't hear you)
+vivox.muteLocalMic("main_connector", true);
+
+// Mute a specific participant locally (for you only)
+vivox.setParticipantMute(sessionHandle, "sip:target-user@domain", true);
+
+// Adjust volume of a specific participant
+vivox.setParticipantVolume(sessionHandle, "sip:target-user@domain", 50);
+```
+
+## Audio Injection
+
+Inject a `.wav` file (must be 16-bit PCM, Mono, matching channel sample rate):
+
+```javascript
+vivox.injectAudio(accountHandle, "path/to/audio.wav");
+```
+
+## Scripts
+
+- `npm run build`: Rebuild the native C++ addon.
+- `npm run compile`: Recompile the TypeScript wrapper.
+- `npm test`: Run the standard connection example.
+
+## License
+
+This project is licensed under the MIT License.
+Vivox SDK is a trademark of Unity Technologies.

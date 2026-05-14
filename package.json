@@ -5,8 +5,8 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "install": "node-gyp rebuild",
-    "build": "node-gyp rebuild",
+    "install": "npx node-gyp rebuild",
+    "build": "npx node-gyp rebuild",
     "test": "node example.js",
     "compile": "npx tsc"
   },

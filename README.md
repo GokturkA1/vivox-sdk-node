@@ -88,16 +88,19 @@ vivox.injectAudio(accountHandle, "path/to/audio.wav");
 
 ## Troubleshooting
 
-### `gyp ERR! find VS` or Visual Studio errors
-This error occurs when `node-gyp` cannot find the C++ build tools on your system. To fix this:
+### `gyp ERR! find VS Failure details: undefined`
+This is the most common error. Even if you have Visual Studio installed, you **MUST** ensure the following workload is selected in the Visual Studio Installer:
 
-1.  **Install Build Tools:** Run the following command in an Administrator PowerShell/Command Prompt:
-    ```bash
-    npm install --global windows-build-tools
-    ```
-    *Alternatively, install "Desktop development with C++" via the Visual Studio Installer.*
+1.  Open **Visual Studio Installer**.
+2.  Click **Modify** on your installed version.
+3.  Under the "Workloads" tab, check **Desktop development with C++**.
+4.  Ensure **MSVC v143 - VS 2022 C++ x64/x86 build tools** (or newer) is checked on the right side.
+5.  Click **Modify** to install.
 
-2.  **Manually Set VS Version:** If you have Visual Studio installed but still get the error, pass the version directly during installation (Modern NPM way):
+Without this workload, `node-gyp` will not recognize your Visual Studio installation.
+
+### Manually Set VS Version
+If you have multiple versions or the error persists, pass the version directly:
     ```bash
     # Replace 2022 with your installed VS version (e.g., 2019, 2022, 2026)
     npm install vivox-sdk-node --msvs_version=2022

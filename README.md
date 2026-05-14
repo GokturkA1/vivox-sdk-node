@@ -97,12 +97,21 @@ This error occurs when `node-gyp` cannot find the C++ build tools on your system
     ```
     *Alternatively, install "Desktop development with C++" via the Visual Studio Installer.*
 
-2.  **Manually Set VS Version:** If you have Visual Studio installed but still get the error, tell NPM which version to use:
+2.  **Manually Set VS Version:** If you have Visual Studio installed but still get the error, pass the version directly during installation (Modern NPM way):
     ```bash
-    # For Visual Studio 2022
-    npm config set msvs_version 2022
-    # For Visual Studio 2026 (if applicable)
-    npm config set msvs_version 2026
+    # Replace 2022 with your installed VS version (e.g., 2019, 2022, 2026)
+    npm install vivox-sdk-node --msvs_version=2022
+    ```
+    Alternatively, set the environment variable:
+    ```powershell
+    # PowerShell
+    $env:GYP_MSVS_VERSION="2022"
+    npm install vivox-sdk-node
+    ```
+    ```cmd
+    # Windows CMD
+    set GYP_MSVS_VERSION=2022
+    npm install vivox-sdk-node
     ```
 
 3.  **Check Python:** Ensure Python 3.x is installed and added to your PATH.

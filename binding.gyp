@@ -32,20 +32,20 @@
               ]
             }],
             ['target_arch=="ia32"', {
-              "libraries": [ "<(module_root_dir)/../SDK/Libraries/Release/Win32/vivoxsdk.lib" ],
+              "libraries": [ "<(module_root_dir)/vivox_sdk/lib/vivoxsdk.lib" ],
               "copies": [
                 {
                   "destination": "<(PRODUCT_DIR)",
-                  "files": [ "<(module_root_dir)/../SDK/Libraries/Release/Win32/vivoxsdk.dll" ]
+                  "files": [ "<(module_root_dir)/vivox_sdk/lib/vivoxsdk.dll" ]
                 }
               ]
             }],
             ['target_arch=="arm64"', {
-              "libraries": [ "<(module_root_dir)/../SDK/Libraries/Release/arm64/vivoxsdk.lib" ],
+              "libraries": [ "<(module_root_dir)/vivox_sdk/lib/vivoxsdk.lib" ],
               "copies": [
                 {
                   "destination": "<(PRODUCT_DIR)",
-                  "files": [ "<(module_root_dir)/../SDK/Libraries/Release/arm64/vivoxsdk.dll" ]
+                  "files": [ "<(module_root_dir)/vivox_sdk/lib/vivoxsdk.dll" ]
                 }
               ]
             }]

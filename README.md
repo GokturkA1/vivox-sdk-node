@@ -99,24 +99,6 @@ This is the most common error. Even if you have Visual Studio installed, you **M
 
 Without this workload, `node-gyp` will not recognize your Visual Studio installation.
 
-### Manually Set VS Version
-If you have multiple versions or the error persists, pass the version directly:
-    ```bash
-    # Replace 2022 with your installed VS version (e.g., 2019, 2022, 2026)
-    npm install vivox-sdk-node --msvs_version=2022
-    ```
-    Alternatively, set the environment variable:
-    ```powershell
-    # PowerShell
-    $env:GYP_MSVS_VERSION="2022"
-    npm install vivox-sdk-node
-    ```
-    ```cmd
-    # Windows CMD
-    set GYP_MSVS_VERSION=2022
-    npm install vivox-sdk-node
-    ```
-
 3.  **Check Python:** Ensure Python 3.x is installed and added to your PATH.
 
 ### `module not found` after installation

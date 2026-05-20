@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 /**
- * Vivox SDK Hata Kodları
+ * Vivox SDK Error Codes
  */
 export declare enum VivoxError {
     VX_E_SUCCESS = 0,
@@ -34,7 +34,7 @@ export declare enum VivoxError {
     VxErrorAlreadyInitialized = 1085
 }
 /**
- * Giriş (Login) durumları
+ * Login states
  */
 export declare enum VivoxLoginState {
     LoggedOut = 0,
@@ -45,7 +45,7 @@ export declare enum VivoxLoginState {
     Error = 100
 }
 /**
- * Ağ bağlantı durumları
+ * Network connection states
  */
 export declare enum VivoxConnectionState {
     Disconnected = 0,
@@ -55,7 +55,7 @@ export declare enum VivoxConnectionState {
     Recovered = 5
 }
 /**
- * Katılımcının kanaldan ayrılma nedenleri
+ * Participant removal reasons
  */
 export declare enum VivoxParticipantRemovedReason {
     Left = 0,
@@ -64,7 +64,7 @@ export declare enum VivoxParticipantRemovedReason {
     Banned = 3
 }
 /**
- * Kanal medya (ses) durumları
+ * Session media (audio) states
  */
 export declare enum VivoxSessionMediaState {
     Disconnected = 1,
@@ -74,7 +74,7 @@ export declare enum VivoxSessionMediaState {
     Disconnecting = 7
 }
 /**
- * Kanal metin (text) durumları
+ * Session text states
  */
 export declare enum VivoxSessionTextState {
     Disconnected = 0,
@@ -83,7 +83,7 @@ export declare enum VivoxSessionTextState {
     Disconnecting = 3
 }
 /**
- * SDK Mesaj Tipleri
+ * SDK Message Types
  */
 export declare enum VivoxMessageType {
     None = 0,
@@ -92,7 +92,7 @@ export declare enum VivoxMessageType {
     Event = 3
 }
 /**
- * SDK Log Seviyeleri
+ * SDK Log Levels
  */
 export declare enum VivoxLogLevel {
     None = -1,
@@ -104,14 +104,146 @@ export declare enum VivoxLogLevel {
     All = 5
 }
 /**
- * Vivox SDK'nın desteklediği temel bir cihaz yapısı.
+ * STUN attempt settings
+ */
+export declare enum VivoxAttemptStun {
+    Unspecified = 0,
+    On = 1,
+    Off = 2
+}
+/**
+ * Connector modes
+ */
+export declare enum VivoxConnectorMode {
+    Normal = 0,
+    Legacy = 1
+}
+/**
+ * Session handle types
+ */
+export declare enum VivoxSessionHandleType {
+    Unique = 0,
+    Legacy = 1,
+    HierarchicalNumeric = 2,
+    HierarchicalUnique = 3
+}
+/**
+ * Log types
+ */
+export declare enum VivoxLogType {
+    None = 0,
+    File = 1,
+    Callback = 2,
+    FileAndCallback = 3
+}
+/**
+ * Recording control types
+ */
+export declare enum VivoxRecordingControlType {
+    Stop = 0,
+    Start = 1,
+    FlushToFile = 2
+}
+/**
+ * Audio injection control types
+ */
+export declare enum VivoxAudioInjectionControlType {
+    Stop = 0,
+    Start = 1,
+    Restart = 2
+}
+/**
+ * Change types (for buddy/group events)
+ */
+export declare enum VivoxChangeType {
+    Set = 1,
+    Delete = 2
+}
+/**
+ * Participant diagnostic states
+ */
+export declare enum VivoxParticipantDiagnosticState {
+    SpeakingWhileMicMuted = 1,
+    SpeakingWhileMicVolumeZero = 2,
+    NoCaptureDevice = 3,
+    NoRenderDevice = 4,
+    CaptureDeviceReadErrors = 5,
+    RenderDeviceWriteErrors = 6
+}
+/**
+ * Network message types
+ */
+export declare enum VivoxNetworkMessageType {
+    OfflineMessage = 1,
+    AdminMessage = 2,
+    SessionlessMessage = 3
+}
+/**
+ * Audio device hot swap event types
+ */
+export declare enum VivoxAudioDeviceHotSwapEventType {
+    DisabledDueToPlatformConstraints = 0,
+    ActiveRenderDeviceChanged = 1,
+    ActiveCaptureDeviceChanged = 2,
+    AudioDeviceAdded = 3,
+    AudioDeviceRemoved = 4
+}
+/**
+ * Password hash algorithms
+ */
+export declare enum VivoxPasswordHashAlgorithm {
+    Cleartext = 0,
+    Sha1UsernameHash = 1
+}
+/**
+ * Request disposition types
+ */
+export declare enum VivoxReqDispositionType {
+    ReplyRequired = 0,
+    NoReplyRequired = 1
+}
+/**
+ * Backend types
+ */
+export declare enum VivoxBackendType {
+    Unknown = -1,
+    SIP = 0,
+    XMPP = 1
+}
+/**
+ * UDP frame types
+ */
+export declare enum VivoxUDPFrameType {
+    RTP = 0,
+    RTCP = 1,
+    SIPMessage = 2,
+    SIPKeepalive = 3
+}
+/**
+ * Bluetooth profiles
+ */
+export declare enum VivoxBluetoothProfile {
+    A2DP = 0,
+    HFP = 1
+}
+/**
+ * Audio stream categories
+ */
+export declare enum VivoxAudioStreamCategory {
+    Normal = 0,
+    GameChat = 1,
+    Communications = 2,
+    Max = 3
+}
+/**
+ * Basic device structure supported by Vivox SDK.
  */
 export interface VivoxDevice {
     name: string;
     id: string;
 }
 /**
- * C++ tarafından gelen ham olay (raw event) formatı.
+ * Raw event format coming from C++.
  */
 export interface VivoxRawEvent {
     type: VivoxMessageType;
@@ -132,28 +264,28 @@ export interface VivoxRawEvent {
     devices?: VivoxDevice[];
 }
 /**
- * Giriş (Login) durumundaki değişiklikleri belirten olay.
+ * Event indicating a change in login state.
  */
 export interface VivoxLoginStateEvent {
     state: VivoxLoginState;
     handle: string;
 }
 /**
- * Kanala yeni bir katılımcının girdiğini belirten olay.
+ * Event indicating a new participant has joined the channel.
  */
 export interface VivoxParticipantAddedEvent {
     participant_uri: string;
     is_current_user: boolean;
 }
 /**
- * Kanaldan bir katılımcının ayrıldığını belirten olay.
+ * Event indicating a participant has left the channel.
  */
 export interface VivoxParticipantRemovedEvent {
     participant_uri: string;
     reason: VivoxParticipantRemovedReason;
 }
 /**
- * Bir katılımcının anlık konuşma (ses) aktivitesini belirten olay.
+ * Event indicating a change in a participant's speech activity.
  */
 export interface VivoxParticipantUpdatedEvent {
     participant_uri: string;
@@ -161,7 +293,7 @@ export interface VivoxParticipantUpdatedEvent {
     energy: number;
 }
 /**
- * Kanal içindeki bir yazılı mesaj olayını belirtir.
+ * Represents a text message event in a channel.
  */
 export interface VivoxMessageEvent {
     participant_uri: string;
@@ -169,7 +301,7 @@ export interface VivoxMessageEvent {
     session_handle: string;
 }
 /**
- * Standart bir SDK yanıt olayını belirtir.
+ * Standard SDK response event.
  */
 export interface VivoxResponseEvent {
     status: number;
@@ -177,7 +309,7 @@ export interface VivoxResponseEvent {
     status_string?: string;
 }
 /**
- * Vivox sınıfı tarafından fırlatılan tüm olayların tür haritası.
+ * Map of all events emitted by the Vivox class.
  */
 export interface VivoxEvents {
     'raw': (event: VivoxRawEvent) => void;
@@ -203,46 +335,136 @@ export declare interface Vivox {
 }
 /**
  * Vivox SDK Node.js Wrapper
+ * Wraps the C++ addon and provides a user-friendly, asynchronous, EventEmitter-based API.
  */
 export declare class Vivox extends EventEmitter {
     private addon;
     private initialized;
     constructor();
+    /**
+     * Returns the current Vivox SDK version info.
+     */
     getVersion(): string;
+    /**
+     * Initializes the Vivox SDK.
+     * Must be called before any other functions.
+     * @returns {number} 0 on success, otherwise an error code.
+     */
     initialize(): number;
+    /**
+     * Internal: Main bridge listening for messages from C++.
+     */
     private _setupInternalCallback;
     private _handleResponse;
     private _handleEvent;
+    /**
+     * Creates a new connection (connector).
+     */
     connectorCreate(server: string, handle?: string): number;
+    /**
+     * Log in with an AuthToken.
+     */
     login(connectorHandle: string, accountUri: string, token: string): number;
+    /**
+     * Log in with an Anonymous (guest) token.
+     */
     loginAnonymous(connectorHandle: string, accountUri: string, token: string): number;
+    /**
+     * Joins a voice/text channel.
+     */
     joinChannel(accountHandle: string, channelUri: string, token: string): number;
+    /**
+     * Sends a text message to the channel.
+     */
     sendMessage(sessionHandle: string, message: string): number;
+    /**
+     * Queries capture (microphone) devices.
+     */
     getCaptureDevices(): number;
+    /**
+     * Activates the target capture device.
+     */
     setCaptureDevice(deviceId: string): number;
+    /**
+     * Queries render (speaker) devices.
+     */
     getRenderDevices(): number;
+    /**
+     * Activates the target render device.
+     */
     setRenderDevice(deviceId: string): number;
+    /**
+     * Sets local microphone volume (0-100).
+     */
     setLocalMicVolume(volume: number): number;
+    /**
+     * Sets local speaker volume (0-100).
+     */
     setLocalSpeakerVolume(volume: number): number;
+    /**
+     * Mutes or unmutes your own microphone. (Others won't hear you)
+     */
     muteLocalMic(connectorHandle: string, mute: boolean): number;
+    /**
+     * Locally mutes or unmutes a specific participant for you.
+     */
     setParticipantMute(sessionHandle: string, participantUri: string, mute: boolean): number;
+    /**
+     * Sets the local volume (0-100) for a specific participant.
+     */
     setParticipantVolume(sessionHandle: string, participantUri: string, volume: number): number;
+    /**
+     * Globally mutes a user in the channel - Requires Admin Token!
+     */
     muteUser(accountHandle: string, channelUri: string, participantUri: string, mute: boolean): number;
+    /**
+     * Globally kicks a user from the channel - Requires Admin Token!
+     */
     kickUser(accountHandle: string, channelUri: string, participantUri: string): number;
+    /**
+     * Injects a .wav file into the channel (simulates your mic).
+     */
     injectAudio(accountHandle: string, filename: string): number;
+    /**
+     * Stops audio injection.
+     */
     stopAudioInjection(accountHandle: string): number;
+    /**
+     * Updates your or a participant's 3D position (X, Y, Z).
+     */
     set3DPosition(accountHandle: string, posX: number, posY: number, posZ: number, channelUri: string): number;
+    /**
+     * Shuts down and cleans up the SDK.
+     */
     uninitialize(): void;
 }
 /**
- * Vivox Utility Fonksiyonları
+ * Vivox Utility Functions
  */
 export declare const VivoxUtils: {
+    /**
+     * Translates a status code to a readable name.
+     */
     getErrorName(statusCode: number): string;
+    /**
+     * Translates a login state code to a readable name.
+     */
     getLoginStateName(state: number): string;
+    /**
+     * Translates a connection state code to a readable name.
+     */
     getConnectionStateName(state: number): string;
+    /**
+     * Generates an account URI (SIP format).
+     */
     generateAccountUri(domain: string, userId: string, environmentDomain: string): string;
+    /**
+     * Generates a channel URI (SIP format).
+     */
     generateChannelUri(domain: string, channelId: string, environmentDomain: string): string;
+    /**
+     * Generates a Session Handle for a channel.
+     */
     generateSessionHandle(channelUri: string): string;
 };
 declare const defaultInstance: Vivox;

@@ -5,7 +5,7 @@ A high-performance, fully type-safe Node.js C++ addon for the Vivox SDK. This wr
 ## Features
 
 - **Asynchronous Event Loop:** Native C++ thread handles Vivox messages and dispatches them to Node.js via `ThreadSafeFunction`.
-- **Full TypeScript Support:** Includes comprehensive interfaces for all events, status codes, and SDK enums.
+- **Full TypeScript Support:** Includes comprehensive interfaces for all events, status codes, and **all** Vivox SDK enums (Login State, Connection State, Diagnostic States, etc.).
 - **Strict Error Handling:** Automatically resolves numerical status codes into official Vivox SDK error names (e.g., `VX_E_ACCESSTOKEN_ALREADY_USED`).
 - **Memory Safe:** Implements proper lifecycle management for requests and internal SDK messages to prevent leaks.
 - **Local Moderation:** Built-in methods for local muting, user volume control, and microphone muting.

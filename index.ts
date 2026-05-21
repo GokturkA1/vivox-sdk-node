@@ -427,6 +427,16 @@ export enum VivoxAudioStreamCategory {
 }
 
 /**
+ * Noise suppression levels
+ */
+export enum VivoxNoiseSuppressionLevel {
+    Low = 0,
+    Moderate = 1,
+    High = 2,
+    VeryHigh = 3
+}
+
+/**
  * Basic device structure supported by Vivox SDK.
  */
 export interface VivoxDevice {
@@ -744,6 +754,35 @@ export class Vivox extends EventEmitter {
     }
 
     /**
+     * Mutes or unmutes all incoming audio (Deafen).
+     */
+    public muteLocalSpeaker(connectorHandle: string, mute: boolean): number {
+        return this.addon.muteLocalSpeaker(connectorHandle, mute ? 1 : 0);
+    }
+
+    /**
+     * Enables or disables noise suppression.
+     */
+    public setNoiseSuppression(enabled: boolean, level: VivoxNoiseSuppressionLevel = VivoxNoiseSuppressionLevel.Moderate): number {
+        this.addon.setNoiseSuppressionLevel(level);
+        return this.addon.setNoiseSuppressionEnabled(enabled ? 1 : 0);
+    }
+
+    /**
+     * Enables or disables Acoustic Echo Cancellation (AEC).
+     */
+    public setAec(enabled: boolean): number {
+        return this.addon.setAecEnabled(enabled ? 1 : 0);
+    }
+
+    /**
+     * Enables or disables Automatic Gain Control (AGC).
+     */
+    public setAgc(enabled: boolean): number {
+        return this.addon.setAgcEnabled(enabled ? 1 : 0);
+    }
+
+    /**
      * Locally mutes or unmutes a specific participant for you.
      */
     public setParticipantMute(sessionHandle: string, participantUri: string, mute: boolean): number {
@@ -762,6 +801,13 @@ export class Vivox extends EventEmitter {
      */
     public muteUser(accountHandle: string, channelUri: string, participantUri: string, mute: boolean): number {
         return this.addon.channelMuteUser(accountHandle, channelUri, participantUri, mute ? 1 : 0);
+    }
+
+    /**
+     * Globally mutes ALL users in the channel - Requires Admin Token!
+     */
+    public muteAllUsers(accountHandle: string, channelUri: string, mute: boolean, token: string): number {
+        return this.addon.muteAllUsers(accountHandle, channelUri, mute ? 1 : 0, token);
     }
 
     /**
@@ -887,3 +933,4 @@ module.exports.VivoxBackendType = VivoxBackendType;
 module.exports.VivoxUDPFrameType = VivoxUDPFrameType;
 module.exports.VivoxBluetoothProfile = VivoxBluetoothProfile;
 module.exports.VivoxAudioStreamCategory = VivoxAudioStreamCategory;
+module.exports.VivoxNoiseSuppressionLevel = VivoxNoiseSuppressionLevel;

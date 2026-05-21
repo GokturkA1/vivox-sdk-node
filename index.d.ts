@@ -393,6 +393,15 @@ export declare enum VivoxAudioStreamCategory {
     Max = 3
 }
 /**
+ * Noise suppression levels
+ */
+export declare enum VivoxNoiseSuppressionLevel {
+    Low = 0,
+    Moderate = 1,
+    High = 2,
+    VeryHigh = 3
+}
+/**
  * Basic device structure supported by Vivox SDK.
  */
 export interface VivoxDevice {
@@ -563,6 +572,22 @@ export declare class Vivox extends EventEmitter {
      */
     muteLocalMic(connectorHandle: string, mute: boolean): number;
     /**
+     * Mutes or unmutes all incoming audio (Deafen).
+     */
+    muteLocalSpeaker(connectorHandle: string, mute: boolean): number;
+    /**
+     * Enables or disables noise suppression.
+     */
+    setNoiseSuppression(enabled: boolean, level?: VivoxNoiseSuppressionLevel): number;
+    /**
+     * Enables or disables Acoustic Echo Cancellation (AEC).
+     */
+    setAec(enabled: boolean): number;
+    /**
+     * Enables or disables Automatic Gain Control (AGC).
+     */
+    setAgc(enabled: boolean): number;
+    /**
      * Locally mutes or unmutes a specific participant for you.
      */
     setParticipantMute(sessionHandle: string, participantUri: string, mute: boolean): number;
@@ -574,6 +599,10 @@ export declare class Vivox extends EventEmitter {
      * Globally mutes a user in the channel - Requires Admin Token!
      */
     muteUser(accountHandle: string, channelUri: string, participantUri: string, mute: boolean): number;
+    /**
+     * Globally mutes ALL users in the channel - Requires Admin Token!
+     */
+    muteAllUsers(accountHandle: string, channelUri: string, mute: boolean, token: string): number;
     /**
      * Globally kicks a user from the channel - Requires Admin Token!
      */

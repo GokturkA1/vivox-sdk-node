@@ -34,7 +34,13 @@ public:
             InstanceMethod("channelMuteUser", &VivoxAddon::ChannelMuteUser),
             InstanceMethod("startAudioInjection", &VivoxAddon::StartAudioInjection),
             InstanceMethod("stopAudioInjection", &VivoxAddon::StopAudioInjection),
-            InstanceMethod("muteLocalMic", &VivoxAddon::MuteLocalMic)
+            InstanceMethod("muteLocalMic", &VivoxAddon::MuteLocalMic),
+            InstanceMethod("muteLocalSpeaker", &VivoxAddon::MuteLocalSpeaker),
+            InstanceMethod("setNoiseSuppressionEnabled", &VivoxAddon::SetNoiseSuppressionEnabled),
+            InstanceMethod("setNoiseSuppressionLevel", &VivoxAddon::SetNoiseSuppressionLevel),
+            InstanceMethod("setAecEnabled", &VivoxAddon::SetAecEnabled),
+            InstanceMethod("setAgcEnabled", &VivoxAddon::SetAgcEnabled),
+            InstanceMethod("muteAllUsers", &VivoxAddon::MuteAllUsers)
         });
         m_running = false;
     }
@@ -43,6 +49,56 @@ private:
     std::atomic<bool> m_running;
     std::thread m_messageThread;
     Napi::ThreadSafeFunction m_tsfn;
+
+    Napi::Value MuteAllUsers(const Napi::CallbackInfo& info) {
+        Napi::Env env = info.Env();
+        std::string accountHandle = info[0].As<Napi::String>();
+        std::string channelUri = info[1].As<Napi::String>();
+        int mute = info[2].As<Napi::Number>().Int32Value();
+        std::string token = info[3].As<Napi::String>();
+
+        vx_req_channel_mute_all_users_t *req;
+        vx_req_channel_mute_all_users_create(&req);
+        req->account_handle = vx_strdup(accountHandle.c_str());
+        req->channel_uri = vx_strdup(channelUri.c_str());
+        req->set_muted = mute;
+        req->access_token = vx_strdup(token.c_str());
+
+        return Napi::Number::New(env, vx_issue_request(&req->base));
+    }
+
+    Napi::Value SetNoiseSuppressionEnabled(const Napi::CallbackInfo& info) {
+        int enabled = info[0].As<Napi::Number>().Int32Value();
+        return Napi::Number::New(info.Env(), vx_set_noise_suppression_enabled(enabled));
+    }
+
+    Napi::Value SetNoiseSuppressionLevel(const Napi::CallbackInfo& info) {
+        int level = info[0].As<Napi::Number>().Int32Value();
+        return Napi::Number::New(info.Env(), vx_set_noise_suppression_level((vx_noise_suppression_level)level));
+    }
+
+    Napi::Value SetAecEnabled(const Napi::CallbackInfo& info) {
+        int enabled = info[0].As<Napi::Number>().Int32Value();
+        return Napi::Number::New(info.Env(), vx_set_vivox_aec_enabled(enabled));
+    }
+
+    Napi::Value SetAgcEnabled(const Napi::CallbackInfo& info) {
+        int enabled = info[0].As<Napi::Number>().Int32Value();
+        return Napi::Number::New(info.Env(), vx_set_agc_enabled(enabled));
+    }
+
+    Napi::Value MuteLocalSpeaker(const Napi::CallbackInfo& info) {
+        Napi::Env env = info.Env();
+        std::string connectorHandle = info[0].As<Napi::String>();
+        int mute = info[1].As<Napi::Number>().Int32Value();
+
+        vx_req_connector_mute_local_speaker_t *req;
+        vx_req_connector_mute_local_speaker_create(&req);
+        req->connector_handle = vx_strdup(connectorHandle.c_str());
+        req->mute_level = mute;
+
+        return Napi::Number::New(env, vx_issue_request(&req->base));
+    }
 
     Napi::Value MuteLocalMic(const Napi::CallbackInfo& info) {
         Napi::Env env = info.Env();

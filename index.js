@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VivoxUtils = exports.Vivox = exports.VivoxAudioStreamCategory = exports.VivoxBluetoothProfile = exports.VivoxUDPFrameType = exports.VivoxBackendType = exports.VivoxReqDispositionType = exports.VivoxPasswordHashAlgorithm = exports.VivoxAudioDeviceHotSwapEventType = exports.VivoxNetworkMessageType = exports.VivoxParticipantDiagnosticState = exports.VivoxChangeType = exports.VivoxAudioInjectionControlType = exports.VivoxRecordingControlType = exports.VivoxLogType = exports.VivoxSessionHandleType = exports.VivoxConnectorMode = exports.VivoxAttemptStun = exports.VivoxLogLevel = exports.VivoxMessageType = exports.VivoxSessionTextState = exports.VivoxSessionMediaState = exports.VivoxParticipantRemovedReason = exports.VivoxConnectionState = exports.VivoxLoginState = exports.VivoxError = void 0;
+exports.VivoxUtils = exports.Vivox = exports.VivoxNoiseSuppressionLevel = exports.VivoxAudioStreamCategory = exports.VivoxBluetoothProfile = exports.VivoxUDPFrameType = exports.VivoxBackendType = exports.VivoxReqDispositionType = exports.VivoxPasswordHashAlgorithm = exports.VivoxAudioDeviceHotSwapEventType = exports.VivoxNetworkMessageType = exports.VivoxParticipantDiagnosticState = exports.VivoxChangeType = exports.VivoxAudioInjectionControlType = exports.VivoxRecordingControlType = exports.VivoxLogType = exports.VivoxSessionHandleType = exports.VivoxConnectorMode = exports.VivoxAttemptStun = exports.VivoxLogLevel = exports.VivoxMessageType = exports.VivoxSessionTextState = exports.VivoxSessionMediaState = exports.VivoxParticipantRemovedReason = exports.VivoxConnectionState = exports.VivoxLoginState = exports.VivoxError = void 0;
 const events_1 = require("events");
 // Load the C++ Addon
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -424,6 +424,16 @@ var VivoxAudioStreamCategory;
     VivoxAudioStreamCategory[VivoxAudioStreamCategory["Max"] = 3] = "Max";
 })(VivoxAudioStreamCategory || (exports.VivoxAudioStreamCategory = VivoxAudioStreamCategory = {}));
 /**
+ * Noise suppression levels
+ */
+var VivoxNoiseSuppressionLevel;
+(function (VivoxNoiseSuppressionLevel) {
+    VivoxNoiseSuppressionLevel[VivoxNoiseSuppressionLevel["Low"] = 0] = "Low";
+    VivoxNoiseSuppressionLevel[VivoxNoiseSuppressionLevel["Moderate"] = 1] = "Moderate";
+    VivoxNoiseSuppressionLevel[VivoxNoiseSuppressionLevel["High"] = 2] = "High";
+    VivoxNoiseSuppressionLevel[VivoxNoiseSuppressionLevel["VeryHigh"] = 3] = "VeryHigh";
+})(VivoxNoiseSuppressionLevel || (exports.VivoxNoiseSuppressionLevel = VivoxNoiseSuppressionLevel = {}));
+/**
  * Vivox SDK Node.js Wrapper
  * Wraps the C++ addon and provides a user-friendly, asynchronous, EventEmitter-based API.
  */
@@ -613,6 +623,31 @@ class Vivox extends events_1.EventEmitter {
         return this.addon.muteLocalMic(connectorHandle, mute ? 1 : 0);
     }
     /**
+     * Mutes or unmutes all incoming audio (Deafen).
+     */
+    muteLocalSpeaker(connectorHandle, mute) {
+        return this.addon.muteLocalSpeaker(connectorHandle, mute ? 1 : 0);
+    }
+    /**
+     * Enables or disables noise suppression.
+     */
+    setNoiseSuppression(enabled, level = VivoxNoiseSuppressionLevel.Moderate) {
+        this.addon.setNoiseSuppressionLevel(level);
+        return this.addon.setNoiseSuppressionEnabled(enabled ? 1 : 0);
+    }
+    /**
+     * Enables or disables Acoustic Echo Cancellation (AEC).
+     */
+    setAec(enabled) {
+        return this.addon.setAecEnabled(enabled ? 1 : 0);
+    }
+    /**
+     * Enables or disables Automatic Gain Control (AGC).
+     */
+    setAgc(enabled) {
+        return this.addon.setAgcEnabled(enabled ? 1 : 0);
+    }
+    /**
      * Locally mutes or unmutes a specific participant for you.
      */
     setParticipantMute(sessionHandle, participantUri, mute) {
@@ -629,6 +664,12 @@ class Vivox extends events_1.EventEmitter {
      */
     muteUser(accountHandle, channelUri, participantUri, mute) {
         return this.addon.channelMuteUser(accountHandle, channelUri, participantUri, mute ? 1 : 0);
+    }
+    /**
+     * Globally mutes ALL users in the channel - Requires Admin Token!
+     */
+    muteAllUsers(accountHandle, channelUri, mute, token) {
+        return this.addon.muteAllUsers(accountHandle, channelUri, mute ? 1 : 0, token);
     }
     /**
      * Globally kicks a user from the channel - Requires Admin Token!
@@ -746,3 +787,4 @@ module.exports.VivoxBackendType = VivoxBackendType;
 module.exports.VivoxUDPFrameType = VivoxUDPFrameType;
 module.exports.VivoxBluetoothProfile = VivoxBluetoothProfile;
 module.exports.VivoxAudioStreamCategory = VivoxAudioStreamCategory;
+module.exports.VivoxNoiseSuppressionLevel = VivoxNoiseSuppressionLevel;
